@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>JavaScript-Shopping-Cart-Practice</title>
+  </head>
+  <body>
+    <div class="content">
+        <button class="ascending" onclick="sortASC()">ASC</button>
+        <button class="descending" onclick="sortDSC()">DSC</button>
+    <div class="products-list">
+      <div class="products">
+        <!-- Products Rendered Here -->
+      </div>
+    </div>
+    <div class="cart">
+        <div class="cart-header">
+            <div class="column1">Item</div>
+            <div class="column2">Unit price</div>
+            <div class="column3">Units</div>
+        </div>
+        <div class="cart-items">
+            <!-- render cart items here -->
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal">Subtotal (0 items): $0</div>
+              <div class="checkout">Proceed to checkout</div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="./js/product.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
