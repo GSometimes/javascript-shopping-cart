@@ -17,11 +17,11 @@
       </div>
     </div>
     <div class="cart">
-        <div class="cart-header">
+        <!-- <div class="cart-header">
             <div class="column1">Item</div>
             <div class="column2">Unit price</div>
             <div class="column3">Units</div>
-        </div>
+        </div> -->
         <div class="cart-items">
             <!-- render cart items here -->
         </div>
@@ -31,6 +31,23 @@
             </div>
           </div>
         </div>
+
+        <!-- Form -->
+        <form id="form">
+
+            <label for="product">Product</label><br>
+            <input type="text" id="product" name="product"><br>
+
+            <label for="price">Price</label><br>
+            <input type="text" id="price" name="price"><br><br>
+
+            <label for="description">Description</label><br>
+            <input type="text" id="description" name="description"><br><br>
+
+            <input type="submit" value="Submit">
+          </form> 
+
+
     </div>
 
     <script src="./js/product.js"></script>

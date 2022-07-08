@@ -3,33 +3,22 @@
 const products = document.querySelector('.products');
 const cartItems = document.querySelector('.cart-items');
 const subtotal = document.querySelector('.subtotal');
-const totalItemsInCart = document.querySelector('.total-items-in-cart');
+const productNode = document.getElementById('product');
+const priceNode = document.getElementById('price');
+const descriptionNode = document.getElementById('description');
+const form = document.querySelector('#form');
 
-// sorting functions
-
-// ascending function
-
-function sortASC() {
-  productsArray.sort((a, b) => (b.name > a.name ? -1 : 1));
-  console.log({ productsArray });
-}
-
-// descending function
-
-function sortDSC() {
-  productsArray.sort((a, b) => (a.name > b.name ? -1 : 1));
-  console.log({ productsArray });
-}
-
+// const totalItemsInCart = document.querySelector('.total-items-in-cart');
 // render products on page
 
 function renderProducts() {
+  products.innerHTML = '';
   productsArray.forEach((product) => {
     products.innerHTML += `
         <div class="item">
             <div class="item-container">
                 <div class="desc">
-                    <h2>${product.name}</h2>
+                    <h2>${product.product}</h2>
                     <h2><small>$</small>${product.price}</h2>
                     <p>${product.description}</p>
                 </div>
@@ -76,7 +65,7 @@ function updateCart() {
   renderSubTotal();
 
   // save cart to local storage
-  //   localStorage.setItem('CART', JSON.stringify(cart));
+  // localStorage.setItem('CART', JSON.stringify(cart));
 }
 
 // calculate and render subtotal
@@ -93,7 +82,8 @@ function renderSubTotal() {
   subtotal.innerHTML = `Subtotal (${totalItems} items): $${totalPrice.toFixed(
     2
   )}`;
-  totalItemsInCart.innerHTML = totalItems;
+  //   console.log("total items count", totalItems, totalItemsInCart);
+  // totalItemsInCart.innerHTML = totalItems;
 }
 
 // remove item from cart
@@ -113,7 +103,7 @@ function renderCartItems() {
     cartItems.innerHTML += `
         <div class="cart-item">
             <div class="item-info" onclick="removeItemFromCart(${item.id})">
-                <h4>${item.name}</h4>
+                <h4>${item.product}</h4>
             </div>
             <div class="unit-price">
                 <small>$</small>${item.price}
@@ -137,7 +127,7 @@ function changeNumberOfUnits(action, id) {
     if (item.id === id) {
       if (action === 'minus' && numberOfUnits > 1) {
         numberOfUnits--;
-      } else if (action === 'plus' && numberOfUnits < item.instock) {
+      } else if (action === 'plus') {
         numberOfUnits++;
       }
     }
@@ -148,4 +138,69 @@ function changeNumberOfUnits(action, id) {
   });
 
   updateCart();
+}
+
+// sorting functions
+
+// ascending function
+
+function sortASC(products) {
+  productsArray.sort((a, b) => (b.product > a.product ? -1 : 1));
+  console.log({ productsArray });
+  renderProducts();
+}
+
+// descending function
+
+function sortDSC() {
+  productsArray.sort((a, b) => (a.product > b.product ? -1 : 1));
+  console.log({ productsArray });
+  renderProducts();
+}
+
+function addItem() {
+  const myProduct = {
+    product: productNode.value,
+    price: priceNode.value,
+    description: descriptionNode.value,
+  };
+  // console.log(myProduct);
+  productsArray.push(myProduct);
+  renderProducts();
+  form.reset();
+}
+
+form.onsubmit = function (e) {
+  e.preventDefault();
+
+  validateForm() && addItem();
+};
+
+function validateForm() {
+  // console.log('is this logging', product.value, price.value, description.value);
+
+  function validateProduct() {
+    if (/[[a-zA-Z]+\s?[:punct:]?]*/g.test(product.value)) {
+      console.log('product validated');
+      return true;
+    }
+  }
+  function validatePrice() {
+    if (/^[\d]*[\.]?[\d]{1,2}$/.test(price.value)) {
+      console.log('price validated');
+      return true;
+    }
+  }
+  function validateDescription() {
+    if (/[[a-zA-Z]+\s?[:punct:]?]*/g.test(description.value)) {
+      console.log('description validated');
+      return true;
+    }
+  }
+  if (validateProduct() && validatePrice() && validateDescription()) {
+    return true;
+  } else {
+    alert('Form not validted');
+    return false;
+  }
 }
