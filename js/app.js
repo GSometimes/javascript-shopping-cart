@@ -10,10 +10,13 @@ const form = document.querySelector('#form');
 
 // const totalItemsInCart = document.querySelector('.total-items-in-cart');
 // render products on page
+let storeProducts =
+  JSON.parse(localStorage.getItem('INVENTORY')) || productsArray;
+let cart = JSON.parse(localStorage.getItem('CART')) || [];
 
 function renderProducts() {
   products.innerHTML = '';
-  productsArray.forEach((product) => {
+  storeProducts.forEach((product) => {
     products.innerHTML += `
         <div class="item">
             <div class="item-container">
@@ -33,8 +36,7 @@ renderProducts();
 
 // cart array
 
-// let cart = JSON.parse(localStorage.getItem('CART')) || [];
-let cart = [];
+// let cart = [];
 updateCart();
 
 // add to cart
@@ -44,7 +46,7 @@ function addToCart(id) {
   if (cart.some((item) => item.id === id)) {
     changeNumberOfUnits('plus', id);
   } else {
-    const item = productsArray.find((product) => product.id === id);
+    const item = storeProducts.find((product) => product.id === id);
     console.log('item', item); // test
 
     cart.push({
@@ -65,7 +67,7 @@ function updateCart() {
   renderSubTotal();
 
   // save cart to local storage
-  // localStorage.setItem('CART', JSON.stringify(cart));
+  localStorage.setItem('CART', JSON.stringify(cart));
 }
 
 // calculate and render subtotal
@@ -145,16 +147,16 @@ function changeNumberOfUnits(action, id) {
 // ascending function
 
 function sortASC(products) {
-  productsArray.sort((a, b) => (b.product > a.product ? -1 : 1));
-  console.log({ productsArray });
+  storeProducts.sort((a, b) => (b.product > a.product ? -1 : 1));
+  console.log({ storeProducts });
   renderProducts();
 }
 
 // descending function
 
 function sortDSC() {
-  productsArray.sort((a, b) => (a.product > b.product ? -1 : 1));
-  console.log({ productsArray });
+  storeProducts.sort((a, b) => (a.product > b.product ? -1 : 1));
+  console.log({ storeProducts });
   renderProducts();
 }
 
@@ -163,10 +165,12 @@ function addItem() {
     product: productNode.value,
     price: priceNode.value,
     description: descriptionNode.value,
+    id: storeProducts.at(-1).id + 1,
   };
-  // console.log(myProduct);
-  productsArray.push(myProduct);
+
+  storeProducts.push(myProduct);
   renderProducts();
+  localStorage.setItem('INVENTORY', JSON.stringify(storeProducts));
   form.reset();
 }
 
