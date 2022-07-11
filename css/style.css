@@ -162,17 +162,23 @@ body {
   color: var(--primary);
 }
 
+.parent-wrapper {
+  /* outline: 4px solid rebeccapurple; */
+  max-width: 850px;
+  width: 100%;
+  padding: 10px;
+}
+
 /* sorting buttons */
 
 .sorting-adding-container {
-  outline: 2px solid var(--thirdary);
-  width: 835px;
-  padding: 10px;
+  outline: 4px solid var(--thirdary);
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin: 10px;
+  margin: 15px 0;
 }
 
 .sorting-btn-container {
@@ -180,20 +186,45 @@ body {
   align-items: center;
   justify-content: flex-start;
   flex-grow: 1;
-  outline: 1px solid teal;
-  padding: 10px;
+  padding: 5px;
 }
 
 .sorting-btn-container button {
+  background: var(--secondary);
   margin: 0 15px;
-
+  padding: 5px;
+  font-size: 1.6rem;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: 2px solid var(--thirdary);
 }
 
 .form {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: flex-start;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.form input {
+  margin: 0 10px 0 5px;
+}
+
+.submit {
+  background: var(--secondary);
+  margin: 0 15px;
+  padding: 5px;
+  font-size: 1.6rem;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: 2px solid var(--thirdary);
 }
 
 /* cart wrapper */
@@ -209,8 +240,8 @@ body {
 
 .products-list {
   outline: 4px solid var(--primary);
-  height: 600px;
-  width: 400px;
+  min-height: 600px;
+  width: 50%;
   padding: 10px;
 }
 
@@ -250,8 +281,8 @@ body {
 /* cart styling */
 .cart {
   outline: 4px solid var(--fourthary);
-  height: 600px;
-  width: 400px;
+  min-height: 600px;
+  width: 50%;
   padding: 10px;
   display: flex;
   flex-direction: column;

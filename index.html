@@ -8,6 +8,8 @@
     <title>JavaScript-Shopping-Cart-Practice</title>
   </head>
   <body>
+    <div class="parent-wrapper">
+
     <h1>Shopping Cart - Vanilla JavaScript</h1>
     <div class="sorting-adding-container">
       <div class="sorting-btn-container">
@@ -16,18 +18,18 @@
         <button type="button" class="descending" onclick="sortDSC()">Descending</button>
       </div>
         <!-- Form -->
-              <form id="form" class="form">
-                <label for="product">Product</label><br>
-                <input type="text" id="product" name="product"><br>
-        
-                <label for="price">Price</label><br>
-                <input type="text" id="price" name="price"><br><br>
-        
-                <label for="description">Description</label><br>
-                <input type="text" id="description" name="description"><br><br>
-        
-                <input type="submit" value="Submit">
-              </form> 
+      <form id="form" class="form">
+        <label for="product">Product:</label>
+        <input type="text" id="product" name="product">
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description">
+
+        <input type="submit" value="Submit" class="submit">
+      </form> 
     </div>
     <div class="content">
       <div class="products-list">
@@ -48,6 +50,7 @@
 
 
     </div>
+  </div>
 
     <script src="./js/app.js"></script>
   </body>
