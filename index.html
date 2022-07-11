@@ -8,49 +8,47 @@
     <title>JavaScript-Shopping-Cart-Practice</title>
   </head>
   <body>
-    <div class="content">
-        <button class="ascending" onclick="sortASC()">ASC</button>
-        <button class="descending" onclick="sortDSC()">DSC</button>
-    <div class="products-list">
-      <div class="products">
-        <!-- Products Rendered Here -->
+    <h1>Shopping Cart - Vanilla JavaScript</h1>
+    <div class="sorting-adding-container">
+      <div class="sorting-btn-container">
+        <h1>Sort Products Alphabetically:</h1>
+        <button type="button" class="ascending" onclick="sortASC()">Ascending</button>
+        <button type="button" class="descending" onclick="sortDSC()">Descending</button>
       </div>
+        <!-- Form -->
+              <form id="form" class="form">
+                <label for="product">Product</label><br>
+                <input type="text" id="product" name="product"><br>
+        
+                <label for="price">Price</label><br>
+                <input type="text" id="price" name="price"><br><br>
+        
+                <label for="description">Description</label><br>
+                <input type="text" id="description" name="description"><br><br>
+        
+                <input type="submit" value="Submit">
+              </form> 
     </div>
-    <div class="cart">
-        <!-- <div class="cart-header">
-            <div class="column1">Item</div>
-            <div class="column2">Unit price</div>
-            <div class="column3">Units</div>
-        </div> -->
+    <div class="content">
+      <div class="products-list">
+        <div class="products">
+          <!-- Products Rendered Here -->
+        </div>
+      </div>
+      <div class="cart">
         <div class="cart-items">
-            <!-- render cart items here -->
+        <!-- render cart items here -->
         </div>
         <div class="cart-footer">
-            <div class="subtotal">Subtotal (0 items): $0</div>
-              <div class="checkout">Proceed to checkout</div>
-            </div>
+          <div class="subtotal">Subtotal (0 items): $0</div>
+            <div class="checkout">Proceed to checkout</div>
           </div>
         </div>
-
-        <!-- Form -->
-        <form id="form">
-
-            <label for="product">Product</label><br>
-            <input type="text" id="product" name="product"><br>
-
-            <label for="price">Price</label><br>
-            <input type="text" id="price" name="price"><br><br>
-
-            <label for="description">Description</label><br>
-            <input type="text" id="description" name="description"><br><br>
-
-            <input type="submit" value="Submit">
-          </form> 
+      </div>
 
 
     </div>
 
-    <script src="./js/product.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>

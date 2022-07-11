@@ -152,22 +152,56 @@ html {
 
 body {
   background: var(--background);
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 100vh;
   font-size: 1.6rem;
   font-family: 'Roboto Mono', monospace;
   color: var(--primary);
 }
 
+/* sorting buttons */
+
+.sorting-adding-container {
+  outline: 2px solid var(--thirdary);
+  width: 835px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+}
+
+.sorting-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  outline: 1px solid teal;
+  padding: 10px;
+}
+
+.sorting-btn-container button {
+  margin: 0 15px;
+
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 /* cart wrapper */
 
 .content {
-  height: 800px;
-  width: 900px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
   gap: 15px;
 }
 
@@ -178,17 +212,6 @@ body {
   height: 600px;
   width: 400px;
   padding: 10px;
-}
-
-/* cart styling */
-.cart {
-  outline: 4px solid var(--fourthary);
-  height: 600px;
-  width: 400px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .item {
@@ -203,24 +226,76 @@ body {
   padding: 5px;
 }
 
-.add-to-cart {
+.add-remove-product {
   background: var(--secondary);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.add-to-cart {
+  flex-grow: 1;
+  outline: 2px solid var(--primary);
   text-align: center;
   padding: 5px;
 }
 
-.cart-item {
+.remove-from-list {
+  flex-grow: 1;
   outline: 2px solid var(--primary);
+  text-align: center;
+  padding: 5px;
+}
+
+/* cart styling */
+.cart {
+  outline: 4px solid var(--fourthary);
+  height: 600px;
+  width: 400px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* cart item styling  */
+
+.cart-item {
+  outline: 2px solid var(--fourthary);
   margin: 10px 0;
 }
 
+.units {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--secondary);
+}
 
+.btn-wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  outline: 2px solid var(--fourthary);
+  padding: 5px;
+}
+
+.btn {
+  margin: 0 15px;
+}
+
+.remove-from-cart {
+  flex-grow: 1;
+  outline: 2px solid var(--fourthary);
+  text-align: center;
+  padding: 5px;
+}
 
 /* cart footer styling */
 
 .cart-footer {
   text-align: center;
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--fourthary);
 }
 .subtotal {
   background: var(--secondary);

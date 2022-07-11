@@ -10,14 +10,14 @@ const form = document.querySelector('#form');
 
 // const totalItemsInCart = document.querySelector('.total-items-in-cart');
 // render products on page
-let storeProducts =
-  JSON.parse(localStorage.getItem('INVENTORY')) || productsArray;
+let storeProducts = JSON.parse(localStorage.getItem('INVENTORY')) || [];
 let cart = JSON.parse(localStorage.getItem('CART')) || [];
 
 function renderProducts() {
   products.innerHTML = '';
-  storeProducts.forEach((product) => {
-    products.innerHTML += `
+  storeProducts.length > 0 &&
+    storeProducts.forEach((product) => {
+      products.innerHTML += `
         <div class="item">
             <div class="item-container">
                 <div class="desc">
@@ -26,10 +26,14 @@ function renderProducts() {
                     <p>${product.description}</p>
                 </div>
             </div>
-            <div class="add-to-cart" onclick="addToCart(${product.id})">+ Add to Cart + </div>
+            <div class="add-remove-product">
+              <div class="add-to-cart" onclick="addToCart(${product.id})">+ Add to Cart + </div>
+              <div class="remove-from-list" onclick="removeProduct(${product.id})">  - Delete -</div>
+            </div>
+
         </div>
         `;
-  });
+    });
 }
 
 renderProducts();
@@ -61,7 +65,7 @@ function addToCart(id) {
 // update cart
 
 function updateCart() {
-  console.log('cart was updated'); // test
+  // console.log('cart was updated'); // test
 
   renderCartItems();
   renderSubTotal();
@@ -97,6 +101,15 @@ function removeItemFromCart(id) {
   updateCart();
 }
 
+// remove item from product array
+function removeProduct(id) {
+  storeProducts = storeProducts.filter((product) => {
+    return product.id !== id;
+  });
+
+  renderProducts();
+}
+
 // render cart item
 
 function renderCartItems() {
@@ -104,16 +117,19 @@ function renderCartItems() {
   cart.forEach((item) => {
     cartItems.innerHTML += `
         <div class="cart-item">
-            <div class="item-info" onclick="removeItemFromCart(${item.id})">
+            <div class="desc" onclick="removeItemFromCart(${item.id})">
                 <h4>${item.product}</h4>
-            </div>
-            <div class="unit-price">
-                <small>$</small>${item.price}
+                <div class="unit-price">
+                  <small>$</small>${item.price}
+                </div>
             </div>
             <div class="units">
+              <div class="btn-wrapper">
                 <div class="btn minus" onclick="changeNumberOfUnits('minus', ${item.id})">-</div>
                 <div class="number">${item.numberOfUnits}</div>
-                <div class="btn plus" onclick="changeNumberOfUnits('plus', ${item.id})">+</div>           
+                <div class="btn plus" onclick="changeNumberOfUnits('plus', ${item.id})">+</div>
+                </div>
+                <div class="remove-from-cart" onclick="removeItemFromCart(${item.id})">- Delete -</div>
             </div>
         </div>
         `;
@@ -127,6 +143,11 @@ function changeNumberOfUnits(action, id) {
     let numberOfUnits = item.numberOfUnits;
 
     if (item.id === id) {
+      // if (action === 'minus' && numberOfUnits === 1) {
+      //   // remove product
+      //   // delete cartItems.item;
+      //   removeItemFromCart(item.id);
+      // }
       if (action === 'minus' && numberOfUnits > 1) {
         numberOfUnits--;
       } else if (action === 'plus') {
@@ -165,7 +186,7 @@ function addItem() {
     product: productNode.value,
     price: priceNode.value,
     description: descriptionNode.value,
-    id: storeProducts.at(-1).id + 1,
+    id: new Date().getTime(),
   };
 
   storeProducts.push(myProduct);
@@ -185,26 +206,26 @@ function validateForm() {
 
   function validateProduct() {
     if (/[[a-zA-Z]+\s?[:punct:]?]*/g.test(product.value)) {
-      console.log('product validated');
+      console.log('product validated', product.value);
       return true;
     }
   }
   function validatePrice() {
     if (/^[\d]*[\.]?[\d]{1,2}$/.test(price.value)) {
-      console.log('price validated');
+      console.log('price validated', price.value);
       return true;
     }
   }
   function validateDescription() {
     if (/[[a-zA-Z]+\s?[:punct:]?]*/g.test(description.value)) {
-      console.log('description validated');
+      console.log('description validated', description.value);
       return true;
     }
   }
   if (validateProduct() && validatePrice() && validateDescription()) {
     return true;
   } else {
-    alert('Form not validted');
+    alert('Form not validated');
     return false;
   }
 }
